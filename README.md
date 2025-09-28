@@ -4,8 +4,8 @@ This repository provides a Nix shell configurations to set up a development envi
 
 ## 🚀 Features
 
-- Shells with a predefined list of extensions for your preferred framework
-- Automatic shell initialization for codium/code
+- Shells with predefined lists of extensions for your preferred framework
+- Automatic launch of the IDE after after shell initialization
 - Ability to choose VSCodium (used by default) or VSCode and to enable unfree packages when entering shell ( See [Optional](#optional) )
 
 ## 🖥️ System requirements
@@ -101,6 +101,7 @@ In the following example Unique identifier from "More Info" is `dbaeumer.vscode-
 > Paste more codeblocks for each extension one after another. Check `nextjs/shell.nix` for reference
 
 5.Run `nix-shell` and update the `sha256` value from the error message when it appears
+
 6.Run `nix-shell` again.
 
 ## 📌 Notes
