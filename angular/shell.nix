@@ -66,6 +66,19 @@ let
           version = "3.0.19";
           sha256 = "sha256-rpYgvo5H1RBviV5L/pfDWqVXIYaZonRiqh4TLFGEODw=";
         }
+        # CSS
+        {
+          name = "vscode-css-peek";
+          publisher = "pranaygp";
+          version = "4.4.3";
+          sha256 = "sha256-oY+mpDv2OTy5hFEk2DMNHi9epFm4Ay4qi0drCXPuYhU=";
+        }
+        {
+          name = "vscode-css-navigation";
+          publisher = "pucelle";
+          version = "2.9.3";
+          sha256 = "sha256-sX7ef+/BCbpVGo4ZOs8wnWRv2y5Ds+Pp8YlVxETmVr4=";
+        }
         # TypeScript & Imports
         {
           name = "tsimporter";
@@ -105,12 +118,24 @@ let
           version = "0.32.2";
           sha256 = "sha256-JIr4UGuwy9Z5oH8D8elGMBGP8s40pYLCEZGmJAO5Ga0=";
         }
-        # Angular 
-                {
+        # Angular
+        {
           name = "angular2";
           publisher = "johnpapa";
           version = "18.0.2";
-          sha256 = "";
+          sha256 = "sha256-h/qmDHG5zzDh76e4yq+s0vjNBYXupPqV5V72opEQsIs=";
+        }
+        {
+          name = "vscode-angular-generator";
+          publisher = "imgildev";
+          version = "2.18.2";
+          sha256 = "sha256-iCOIY+jKAgsfmqnFmmzUN8PjMmGfgYFcl+mhS0uwENQ=";
+        }
+        {
+          name = "rename-angular-component";
+          publisher = "tomwhite007";
+          version = "4.0.0";
+          sha256 = "sha256-Lb4WgFloEygIQ5yGDghMZ+enwRyVp599lq7lZIPBWLs=";
         }
       ];
   };
