@@ -70,11 +70,11 @@ To add extensions:
 2. Search and select desired extension
 
 3. Find the identifier:
-- In the "Installation" section below the name and publisher
+   
+   - In the "Installation" section below the name and publisher
+   - In the "More Info" section as Unique Identifier
+   - In the URL parameter `?itemName=`
 
-- In the "More Info" section as Unique Identifier
-
-- In the URL parameter `?itemName=`
 4. Check that extension is available by using [NixOS Search](https://search.nixos.org/packages)
 
 ### 📦 Adding Non-Nixpkgs Extensions
@@ -102,9 +102,17 @@ In the following example Unique identifier from "More Info" is `dbaeumer.vscode-
 5.Run `nix-shell` and update the `sha256` value from the error message when it appears
 6.Run `nix-shell` again.
 
-### Expanding your environment with other packages packages
-
 ## 📌 Notes
 
 - This setup requires internet access to download extensions
 - Nixpkgs versions may change over time - check for updates periodically
+
+## License
+
+vscodium-with-extensions-nix-shell is released under the [LGPL-2.1 license](COPYING).
+Nix is released under the [LGPL-2.1 license](COPYING)
+
+Nixpkgs is licensed under the [MIT License](LICENCE-MIT).
+
+> [!Note]
+> MIT license does not apply to the packages built by Nixpkgs.It also might not apply to patches included in Nixpkgs, which may be derivative works of the packages to which they apply. The aforementioned artifacts are all covered by the licenses of the respective packages.
