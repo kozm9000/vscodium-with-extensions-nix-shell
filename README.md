@@ -10,20 +10,21 @@ This repository provides a Nix shell configurations to set up a development envi
 
 ## 🖥️ System requirements
 
-🐧 [Debian](https://packages.debian.org/trixie/nix-bin) and [Ubuntu](https://packages.ubuntu.com/noble/nix-bin)
+🐧 [Debian](https://packages.debian.org/trixie/nix-bin) and [Ubuntu](https://packages.ubuntu.com/noble/nix-bin):
 
 ```bash
 sudo apt install nix-bin
 ```
 
-🐧 [Arch Linux](https://archlinux.org/packages/extra/x86_64/nix/)
+🐧 [Arch Linux](https://archlinux.org/packages/extra/x86_64/nix/):
 
 ```bash
 sudo pacman -S nix
 ```
 
-🪟 Windows/macOS/Docker/ Other distros
-Follow official [installation guide](https://nixos.org/download/) for Nix : the package manager
+🪟 Windows/macOS/Docker/ Other distros:
+
+Follow official [installation guide](https://nix.dev/install-nix)
 
 ## 💡 Usage
 
@@ -106,6 +107,10 @@ In the following example Unique identifier from "More Info" is `dbaeumer.vscode-
 
 - This setup requires internet access to download extensions
 - Nixpkgs versions may change over time - check for updates periodically
+
+If you want to learn Nix, check out [beginner tutorials](https://nix.dev/tutorials/first-steps).
+
+Full reference documentation can be found in the [Nix manual](https://nix.dev/reference/nix-manual).
 
 ## License
 
