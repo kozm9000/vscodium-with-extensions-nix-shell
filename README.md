@@ -1,6 +1,6 @@
 # VSCodium/VSCode Development Environment
 
-This repository provides a Nix shell configurations to set up a development environment with [VSCodium](https://vscodium.com/) or [Microsoft Visual Studio Code](https://code.visualstudio.com/) with a curated set of extensions.
+This repository provides Nix shell configurations to set up development environments with [VSCodium](https://vscodium.com/) or [Microsoft Visual Studio Code](https://code.visualstudio.com/) with a curated set of extensions.
 
 ## 🚀 Features
 
@@ -35,7 +35,7 @@ git clone https://github.com/kozm9000/vscodium-with-extensions-nix-shell.git
 cd vscodium-with-extensions-nix-shell
 ```
 
-`cd` again into `angular` or `nextjs` to use a shell with a predefined list of extensions for your preferred framework or use `shell.nix` at the root of the repo to define your own
+`cd` again into `angular` or `nextjs` to use a shell with a predefined list of extensions for your preferred framework or use `shell.nix` at the root of the repo to define your own.
 
 2.Enter the development shell with VSCodium:
 
@@ -113,10 +113,13 @@ If you want to learn Nix, check out [beginner tutorials](https://nix.dev/tutoria
 
 Full reference documentation can be found in the [Nix manual](https://nix.dev/reference/nix-manual).
 
+Beyond just installing the IDE, you can [configure](https://nixos.wiki/wiki/Development_environment_with_nix-shell) your shell specifically for the needs of your project akin to a virtual environment. Check line 83 in `./shell.nix` for an example.
+
 ## License
 
 vscodium-with-extensions-nix-shell is released under the [LGPL-2.1 license](COPYING).
-Nix is released under the [LGPL-2.1 license](COPYING)
+
+Nix is released under the [LGPL-2.1 license](COPYING).
 
 Nixpkgs is licensed under the [MIT License](LICENCE-MIT).
 
