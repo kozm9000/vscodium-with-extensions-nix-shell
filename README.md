@@ -1,4 +1,4 @@
-# VSCodium/VSCode Development Environment
+# Nix-shell development environment with VSCodium/VSCode and preinstalled extensions
 
 This repository provides Nix shell configurations to set up development environments with [VSCodium](https://vscodium.com/) or [Microsoft Visual Studio Code](https://code.visualstudio.com/) with a curated set of extensions.
 
@@ -6,7 +6,8 @@ This repository provides Nix shell configurations to set up development environm
 
 - Shells with predefined lists of extensions for your preferred framework
 - Automatic launch of the IDE after after shell initialization
-- Ability to choose VSCodium (used by default) or VSCode and to enable unfree packages when entering shell ( See [Optional](#optional) )
+- Ability to choose VSCodium (used by default) or VSCode and to enable unfree packages when entering shell (See [Optional](#optional))
+- Easily expandable/modifiable to suit your specific needs
 
 ## 🖥️ System requirements
 
@@ -60,9 +61,9 @@ nix-shell --arg useVsCode true
 nix-shell --arg allowUnfree true
 ```
 
-## 🛠️ Customizing Extensions
+## 🛠️ Customizing extensions
 
-### 🔍 Finding Extension Identifiers
+### 🔍 Finding extension identifiers
 
 To add extensions:
 
@@ -78,9 +79,9 @@ To add extensions:
 
 4. Check that extension is available by using [NixOS Search](https://search.nixos.org/packages)
 
-### 📦 Adding Non-Nixpkgs Extensions
+### 📦 Adding non-nixpkgs extensions
 
-For extensions not available in Nixpkgs:
+For extensions not available in nixpkgs:
 
 1. Visit [Visual Studio Marketplace](https://marketplace.visualstudio.com/)
 2. Search and select desired extension
