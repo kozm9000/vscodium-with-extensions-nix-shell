@@ -1,7 +1,9 @@
 # Nix-shell configuration for Vscodium/VSCode with custom extensions
 # Run "nix-shell --arg useVsCode true" for VSCode
 # Run "nix-shell --arg allowUnfree true" to enable unfree extensions while still using VSCodium
-# OR set - "useVsCode ? true,"  on line 7 to use VSCode as default and run "nix-shell" without --arg.
+# OR set - "useVsCode ? true,"  on line 9 to use VSCode as default and run "nix-shell" without --arg.
+#
+#
 {
   allowUnfree ? false,
   useVsCode ? false,
@@ -9,7 +11,7 @@
 let
   # Configure package settings based on allowUnfree flag
   config = {
-    allowUnfree = if useVsCode == true then true else (if allowUnfree == true then true else false);
+    allowUnfree = if useVsCode then true else (if allowUnfree then true else false);
   };
   # Import Nixpkgs with our configuration
   pkgs = import <nixpkgs> { inherit config; };
@@ -24,7 +26,7 @@ let
     #  3.1 the "Installation" section below the name and publisher
     #  3.2 or in "More Info" section as Unique Identifier
     #  3.3 or in the URL param ?itemName=
-    # II. Check that extention is available in nixpgks https://search.nixos.org/packages
+    # II. Check that extension is available in nixpgks https://search.nixos.org/packages
     #     Full list of available extensions via nixpkgs can be found at https://search.nixos.org/packages?channel=25.05&query=vscode-extensions.
     # III. If available, paste preferred package below in publisher.name format omitting vscode-extensions. prefix . If not read IV.
     # Adwaita theme as an example below:
@@ -40,7 +42,7 @@ let
         # IV. If the extension iS not available in nixpkgs:
         #  1. Visit https://marketplace.visualstudio.com/
         #  2. Search and select desired extension
-        #  3. Go to "More Info" section and use Unique Identifier ( publusher.name ) and Version
+        #  3. Go to "More Info" section and use Unique Identifier ( publisher.name ) and Version
         #  4. Fill in the following codeblock in curly braces leaving sha256 empty
         #        {
         #      name = "";
@@ -81,10 +83,10 @@ pkgs.mkShellNoCC {
   # Build environment with custom VSCode setup
   packages = [
     vscodeWithExtensions
-    # Insert other preferred packages here with pkgs. prefix ( pkgs.python313 )
-    # You can also install libraries/modules - pkgs.python313Packages.django
+    # Insert other preferred packages here with pkgs. prefix ( e.g. pkgs.python313 pkgs.nodejs_22)
+    # You can also install libraries/modules - ( e.g. pkgs.python313Packages.django nodePackages.svgo)
     # To find packages, visit https://search.nixos.org/packages
   ];
   # Automatically run vscodium ( or vscode ) when entering the shell.
-  shellHook = if useVsCode == true then "code" else "codium";
+  shellHook = if useVsCode then "code" else "codium";
 }
