@@ -40,6 +40,9 @@ pkgs.mkShellNoCC {
   # Build environment with custom VSCode setup
   packages = [
     vscodeWithExtensions
+    # Insert other preferred packages here with pkgs. prefix ( e.g. pkgs.python313 pkgs.nodejs_22)
+    # You can also install libraries/modules - ( e.g. pkgs.python313Packages.django nodePackages.svgo)
+    # To find packages, visit https://search.nixos.org/packages
   ];
   # Automatically run vscodium ( or vscode ) when entering the shell.
   shellHook = if useVsCode then "code" else "codium";
