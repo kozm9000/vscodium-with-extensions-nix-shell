@@ -16,6 +16,7 @@ This repository provides Nix shell configurations to set up development environm
 - Automatic launch of the IDE after after shell initialization
 - Ability to choose VSCodium (used by default) or VSCode and to enable unfree packages when entering shell (See [Optional](#optional))
 - Easily expandable/modifiable to suit your specific needs
+- Bare-bones shell templates
 
 ## 🖥️ System requirements
 
@@ -31,7 +32,7 @@ sudo apt install nix-bin
 sudo pacman -S nix
 ```
 
-🪟 Windows/macOS/Docker/ Other distros:
+🪟 Windows/macOS/Docker/ Other distributions:
 
 Follow official [installation guide](https://nix.dev/install-nix)
 
@@ -44,7 +45,8 @@ git clone https://github.com/kozm9000/vscodium-with-extensions-nix-shell.git
 cd vscodium-with-extensions-nix-shell
 ```
 
-`cd` again into `angular` or `nextjs` to use a shell with a predefined list of extensions for your preferred framework or use `shell.nix` at the root of the repo to define your own.
+> `cd` again into folder named after your preferred framework ( e.g. `angular` ) to use a shell with a predefined list of extensions.
+> To add your extensions within predefined shells use `./modules/user-extensions.nix`.
 
 2.Enter the development shell with VSCodium:
 
@@ -57,7 +59,7 @@ nix-shell
 
 ### Optional
 
-To use VSCode instead, set the `useVsCode` flag:
+To use VSCode instead, set the `useVsCode` argument:
 
 ```bash
 nix-shell --arg useVsCode true
@@ -69,7 +71,16 @@ nix-shell --arg useVsCode true
 nix-shell --arg allowUnfree true
 ```
 
-> Alternatively, set "useVsCode ? true," on line 7 in any of `shell.nix` files to use VSCode by default and run just `nix-shell` without the need for --arg.
+> Alternatively, set "useVsCode ? true," on line 9 in any of `shell.nix` files to use VSCode by default and run just `nix-shell` without the need for --arg.
+
+Available boolean arguments:
+
+- enableGitExtensions
+- enableHtmlCssExtensions
+- enableJsTsExtensions
+- enableMarkdownExtensions
+- enableUniversalExtensions
+- enableUserExtensions
 
 ## 🛠️ Customizing extensions
 
@@ -88,6 +99,7 @@ To add extensions:
    - In the URL parameter `?itemName=`
 
 4. Check that extension is available by using [NixOS Search](https://search.nixos.org/packages)
+5. Add the extension identifier to `with pkgs.vscode-extensions;[paste here]` in `./modules/user-extensions.nix`
 
 ### 📦 Adding non-nixpkgs extensions
 
@@ -96,7 +108,7 @@ For extensions not available in nixpkgs:
 1. Visit [Visual Studio Marketplace](https://marketplace.visualstudio.com/)
 2. Search and select desired extension
 3. Go to "More Info" section and use the Unique Identifier (publisher.name) and Version
-4. Add the extension to `++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [paste here]` in `shell.nix`:
+4. Add the extension to `++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [paste here]` in `./modules/user-extensions.nix`:
 
 In the following example Unique identifier from "More Info" is `dbaeumer.vscode-eslint`:
 
@@ -109,11 +121,20 @@ In the following example Unique identifier from "More Info" is `dbaeumer.vscode-
 }
 ```
 
-> Paste more codeblocks for each extension one after another. Check `nextjs/shell.nix` for reference
+> Paste more codeblocks for each extension one after another. Check `./modules/js-ts-base.nix` for reference
 
 5.Run `nix-shell` and update the `sha256` value from the error message when it appears
 
 6.Run `nix-shell` again.
+
+## 🥸 User defined shells
+
+1. Use `./shell.nix` as a template to fully define all extensions or packages from scratch
+2. Use `./template/shell.nix` as a template but with imports from `./modules`
+
+*Both files have instructions inside.*
+
+>Beyond just installing the IDE, you can [configure](https://nixos.wiki/wiki/Development_environment_with_nix-shell) your shell specifically for the needs of your project akin to a virtual environment. Check line 84 in `./shell.nix` for an example.
 
 ## 📌 Notes
 
@@ -123,8 +144,6 @@ In the following example Unique identifier from "More Info" is `dbaeumer.vscode-
 If you want to learn Nix, check out [beginner tutorials](https://nix.dev/tutorials/first-steps).
 
 Full reference documentation can be found in the [Nix manual](https://nix.dev/reference/nix-manual).
-
-Beyond just installing the IDE, you can [configure](https://nixos.wiki/wiki/Development_environment_with_nix-shell) your shell specifically for the needs of your project akin to a virtual environment. Check line 83 in `./shell.nix` for an example.
 
 ## License
 
