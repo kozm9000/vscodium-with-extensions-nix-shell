@@ -69,6 +69,8 @@ nix-shell --arg useVsCode true
 nix-shell --arg allowUnfree true
 ```
 
+> Alternatively, set "useVsCode ? true," on line 7 in any of `shell.nix` files to use VSCode by default and run just `nix-shell` without the need for --arg.
+
 ## 🛠️ Customizing extensions
 
 ### 🔍 Finding extension identifiers
