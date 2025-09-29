@@ -1,8 +1,8 @@
 <p align="center">
     <picture>
-      <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/13113804-a4a5-46c5-80ed-406b1989b2f2">
-      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/db3d072e-7693-4220-8ea0-a97fad445184">
-      <img width="590" height="590" alt="Image" src="https://github.com/user-attachments/assets/db3d072e-7693-4220-8ea0-a97fad445184" />
+      <source media="(prefers-color-scheme: light)"  width="590" height="590" srcset="branding/nix+vscode-vscodium-white.png">
+      <source media="(prefers-color-scheme: dark)"  width="590" height="590" srcset="branding/nix+vscode-vscodium.png">
+      <img width="590" height="590" alt="Nix_+ VSCode/VSCodium logos" src="branding/nix+vscode-vscodium.png" />
     </picture>
 </p>
 
