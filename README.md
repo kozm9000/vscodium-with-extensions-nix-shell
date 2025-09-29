@@ -1,3 +1,11 @@
+<p align="center">
+    <picture>
+      <source media="(prefers-color-scheme: light)" srcset="https://github.com/user-attachments/assets/13113804-a4a5-46c5-80ed-406b1989b2f2">
+      <source media="(prefers-color-scheme: dark)" srcset="https://github.com/user-attachments/assets/db3d072e-7693-4220-8ea0-a97fad445184">
+      <img width="590" height="590" alt="Image" src="https://github.com/user-attachments/assets/db3d072e-7693-4220-8ea0-a97fad445184" />
+    </picture>
+</p>
+
 # Nix-shell development environment with VSCodium/VSCode and preinstalled extensions
 
 This repository provides Nix shell configurations to set up development environments with [VSCodium](https://vscodium.com/) or [Microsoft Visual Studio Code](https://code.visualstudio.com/) with a curated set of extensions.
@@ -72,7 +80,7 @@ To add extensions:
 2. Search and select desired extension
 
 3. Find the identifier:
-   
+
    - In the "Installation" section below the name and publisher
    - In the "More Info" section as Unique Identifier
    - In the URL parameter `?itemName=`
