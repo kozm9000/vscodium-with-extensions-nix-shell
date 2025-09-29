@@ -1,8 +1,8 @@
 <p align="center">
     <picture>
-      <source media="(prefers-color-scheme: light)"  width="590" height="590" srcset="branding/nix+vscode-vscodium-white.png">
-      <source media="(prefers-color-scheme: dark)"  width="590" height="590" srcset="branding/nix+vscode-vscodium.png">
-      <img width="590" height="590" alt="Nix_+ VSCode/VSCodium logos" src="branding/nix+vscode-vscodium.png" />
+      <source media="(prefers-color-scheme: light)"  width="590" srcset="branding/nix+vscode-vscodium-white.png">
+      <source media="(prefers-color-scheme: dark)"  width="590" srcset="branding/nix+vscode-vscodium.png">
+      <img width="590" alt="Nix_+ VSCode/VSCodium logos" src="branding/nix+vscode-vscodium.png" />
     </picture>
 </p>
 
