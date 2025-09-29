@@ -1,151 +1,46 @@
-# Nix-shell configuration for Vscodium/VSCode with custom extensions for Angular
+# Nix-shell configuration for Vscodium/VSCode with custom extensions for Next.js
 # Run "nix-shell --arg useVsCode true" for VSCode
 # Run "nix-shell --arg allowUnfree true" to enable unfree extensions while still using VSCodium
 # OR set - "useVsCode ? true,"  on line 7 to use VSCode as default and run "nix-shell" without --arg.
+# Disable or enable entire extension packs by setting the corresponding flag to true or false.
+# Add you own preferred extensions to ../modules/user-extensions.nix
 {
   allowUnfree ? false,
   useVsCode ? false,
+  enableGitExtensions ? true,
+  enableHtmlCssExtensions ? true,
+  enableJsTsExtensions ? true,
+  enableMarkdownExtensions ? true,
+  enableUniversalExtensions ? true,
+  enableUserExtensions ? true,
 }:
 let
   # Configure package settings based on flags
   config = {
-    allowUnfree = if useVsCode == true then true else (if allowUnfree == true then true else false);
+    allowUnfree = if useVsCode then true else (if allowUnfree then true else false);
   };
   # Import Nixpkgs with our configuration
   pkgs = import <nixpkgs> { inherit config; };
+  gitExtensions = if enableGitExtensions then import ../modules/git.nix { inherit pkgs; } else [];
+  htmlCssExtensions = if enableHtmlCssExtensions then import ../modules/html-css.nix { inherit pkgs;} else [];
+  jsTsExtensions = if enableJsTsExtensions then import ../modules/js-ts-base.nix { inherit pkgs;} else [];
+  markdownExtensions = if enableMarkdownExtensions then import ../modules/markdown.nix { inherit pkgs;} else [];
+  userExtensions = if enableUserExtensions then import ../modules/user-extensions.nix { inherit pkgs; } else [];
+  universalExtensions = if enableUniversalExtensions then import ../modules/universal.nix { inherit pkgs; } else [];
+  angularExtensions = import ./angular.nix { inherit pkgs; };
+  allExtensions = gitExtensions ++ htmlCssExtensions ++ jsTsExtensions ++ markdownExtensions ++ userExtensions ++ universalExtensions ++ angularExtensions ;
   # Define a custom VSCode derivation with extensions
   vscodeWithExtensions = pkgs.vscode-with-extensions.override {
     # Select VSCode (unfree) or Vscodium based on flags
-    vscode = if useVsCode == true then pkgs.vscode else pkgs.vscodium;
-    vscodeExtensions =
-      with pkgs.vscode-extensions;
-      [
-        # Theme
-        piousdeer.adwaita-theme
-        # Angular
-        angular.ng-template
-        # Docker and DB client
-        ms-azuretools.vscode-containers
-        cweijan.vscode-database-client2
-        # Html and CSS intellisense
-        ecmel.vscode-html-css
-        bradlc.vscode-tailwindcss
-        # Code Style & Linting
-        esbenp.prettier-vscode
-        yoavbls.pretty-ts-errors
-        styled-components.vscode-styled-components
-        wix.vscode-import-cost
-        formulahendry.auto-close-tag
-        formulahendry.auto-rename-tag
-        aaron-bond.better-comments
-        vincaslt.highlight-matching-tag
-        oderwat.indent-rainbow
-        mechatroner.rainbow-csv
-        shardulm94.trailing-spaces
-        # Markdown
-        yzhang.markdown-all-in-one
-        davidanson.vscode-markdownlint
-        shd101wyy.markdown-preview-enhanced
-        # Git & Version Control
-        # mhutchie.git-graph
-        codezombiech.gitignore
-        eamodio.gitlens
-        # Utilities
-        usernamehw.errorlens
-        mikestead.dotenv
-        editorconfig.editorconfig
-        christian-kohler.path-intellisense
-        naumovs.color-highlight
-        # AI
-        continue.continue
-      ]
-      ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
-        # Code Style & Linting
-        {
-          name = "vscode-eslint";
-          publisher = "dbaeumer";
-          version = "3.0.19";
-          sha256 = "sha256-rpYgvo5H1RBviV5L/pfDWqVXIYaZonRiqh4TLFGEODw=";
-        }
-        # CSS
-        {
-          name = "vscode-css-peek";
-          publisher = "pranaygp";
-          version = "4.4.3";
-          sha256 = "sha256-oY+mpDv2OTy5hFEk2DMNHi9epFm4Ay4qi0drCXPuYhU=";
-        }
-        {
-          name = "vscode-css-navigation";
-          publisher = "pucelle";
-          version = "2.9.3";
-          sha256 = "sha256-sX7ef+/BCbpVGo4ZOs8wnWRv2y5Ds+Pp8YlVxETmVr4=";
-        }
-        # TypeScript & Imports
-        {
-          name = "tsimporter";
-          publisher = "pmneo";
-          version = "2.0.1";
-          sha256 = "sha256-JQ7dAliryvVXH0Rg1uheSznOHqbp/BMwwlePH9P0kog=";
-        }
-        {
-          name = "autoimport";
-          publisher = "steoates";
-          version = "1.5.4";
-          sha256 = "sha256-7iIwJJsoNbtTopc+BQ+195aSCLqdNAaGtMoxShyhBWY=";
-        }
-        {
-          name = "move-ts";
-          publisher = "stringham";
-          version = "1.12.0";
-          sha256 = "sha256-qjqdyER2T40YwpiBOQw5/jzaFa3Ek01wLx6hb1TM3ac=";
-        }
-        {
-          name = "json-to-ts";
-          publisher = "MariusAlchimavicius";
-          version = "1.8.0";
-          sha256 = "sha256-WoSycVtUAkVXv7BDuh+jFbnaU1IdVLvVjOYuIuUp79M=";
-        }
-        # Git & Version Control
-        {
-          name = "vscode-conventional-commits";
-          publisher = "vivaxy";
-          version = "1.26.0";
-          sha256 = "sha256-Lj2+rlrKm9h21zEoXwa2TeGFNKBmlQKr7MRX0zgngdg=";
-        }
-        # Utilities
-        {
-          name = "vscode-gutter-preview";
-          publisher = "kisstkondoros";
-          version = "0.32.2";
-          sha256 = "sha256-JIr4UGuwy9Z5oH8D8elGMBGP8s40pYLCEZGmJAO5Ga0=";
-        }
-        # Angular
-        {
-          name = "angular2";
-          publisher = "johnpapa";
-          version = "18.0.2";
-          sha256 = "sha256-h/qmDHG5zzDh76e4yq+s0vjNBYXupPqV5V72opEQsIs=";
-        }
-        {
-          name = "vscode-angular-generator";
-          publisher = "imgildev";
-          version = "2.18.2";
-          sha256 = "sha256-iCOIY+jKAgsfmqnFmmzUN8PjMmGfgYFcl+mhS0uwENQ=";
-        }
-        {
-          name = "rename-angular-component";
-          publisher = "tomwhite007";
-          version = "4.0.0";
-          sha256 = "sha256-Lb4WgFloEygIQ5yGDghMZ+enwRyVp599lq7lZIPBWLs=";
-        }
-      ];
+    vscode = if useVsCode then pkgs.vscode else pkgs.vscodium;
+    vscodeExtensions = allExtensions;
   };
 in
-pkgs.mkShell {
+pkgs.mkShellNoCC {
   # Build environment with custom VSCode setup
   packages = [
     vscodeWithExtensions
   ];
   # Automatically run vscodium ( or vscode ) when entering the shell.
-  shellHook = if useVsCode == true then "code" else "codium";
+  shellHook = if useVsCode then "code" else "codium";
 }
