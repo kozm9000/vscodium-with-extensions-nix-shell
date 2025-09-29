@@ -1,6 +1,7 @@
 # Nix-shell configuration for Vscodium/VSCode with custom extensions
-# Run "nix-shell --arg allowUnfree true" for VSCode
-# OR set - "allowUnfree ? true,"  on line 5 to use VSCode as default and run "nix-shell" without --arg.
+# Run "nix-shell --arg useVsCode true" for VSCode
+# Run "nix-shell --arg allowUnfree true" to enable unfree extensions while still using VSCodium
+# OR set - "useVsCode ? true,"  on line 7 to use VSCode as default and run "nix-shell" without --arg.
 {
   allowUnfree ? false,
   useVsCode ? false,
