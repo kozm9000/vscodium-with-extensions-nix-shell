@@ -7,8 +7,16 @@
 {
   allowUnfree ? false,
   useVsCode ? false,
-  enableUniversalExtensions ? true,
+  enableGitExtensions ? false,
+  enableHtmlCssExtensions ? false,
+  enableJsTsExtensions ? false,
+  enableMarkdownExtensions ? false,
+  enableUniversalExtensions ? false,
   enableUserExtensions ? true,
+  enableDjangoExtensions ? false,
+  enablePythonExtensions ? false,
+  enableAngularExtensions ? false,
+  enableNextjsExtensions ? false,
 }:
 let
   # Configure package settings based on flags
@@ -17,12 +25,17 @@ let
   };
   # Import Nixpkgs with our configuration
   pkgs = import <nixpkgs> { inherit config; };
-  # If you want yo use predefinded modules import them like this:
-  # gitExtensions = import ../modules/git.nix { inherit pkgs; } else [];
-  # Add gitExtensions to allExtensions on line 26 (allExtensions = userExtensions ++ universalExtensions ++ gitExtensions )
-  userExtensions = if enableUserExtensions then import ../modules/user-extensions.nix { inherit pkgs; } else [];
+  gitExtensions = if enableGitExtensions then import ../modules/git.nix { inherit pkgs; } else [];
+  htmlCssExtensions = if enableHtmlCssExtensions then import ../modules/html-css.nix { inherit pkgs;} else [];
+  jsTsExtensions = if enableJsTsExtensions then import ../modules/js-ts-base.nix { inherit pkgs;} else [];
+  markdownExtensions = if enableMarkdownExtensions then import ../modules/markdown.nix { inherit pkgs;} else [];
   universalExtensions = if enableUniversalExtensions then import ../modules/universal.nix { inherit pkgs; } else [];
-  allExtensions = userExtensions ++ universalExtensions ;
+  userExtensions = if enableUserExtensions then import ../modules/user-extensions.nix { inherit pkgs; } else [];
+  pythonExtensions = if enablePythonExtensions then import ../modules/python.nix {inherit pkgs;} else [];
+  djangoExtensions = if enableDjangoExtensions then import ../django/django.nix { inherit pkgs; } else [];
+  angularExtensions = if enableAngularExtensions then import ../angular/angular.nix { inherit pkgs; } else [];
+  nextjsExtensions =  if enableNextjsExtensions then import ../nextjs/nextjs.nix { inherit pkgs; } else [];
+  allExtensions = gitExtensions ++ htmlCssExtensions ++ jsTsExtensions ++ markdownExtensions ++ universalExtensions ++ userExtensions ++ pythonExtensions ++ djangoExtensions ++ angularExtensions ++ nextjsExtensions;
   # Define a custom VSCode derivation with extensions
   vscodeWithExtensions = pkgs.vscode-with-extensions.override {
     # Select VSCode (unfree) or Vscodium based on flags
