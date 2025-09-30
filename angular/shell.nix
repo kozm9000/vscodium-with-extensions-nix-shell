@@ -25,10 +25,10 @@ let
   htmlCssExtensions = if enableHtmlCssExtensions then import ../modules/html-css.nix { inherit pkgs;} else [];
   jsTsExtensions = if enableJsTsExtensions then import ../modules/js-ts-base.nix { inherit pkgs;} else [];
   markdownExtensions = if enableMarkdownExtensions then import ../modules/markdown.nix { inherit pkgs;} else [];
-  userExtensions = if enableUserExtensions then import ../modules/user-extensions.nix { inherit pkgs; } else [];
   universalExtensions = if enableUniversalExtensions then import ../modules/universal.nix { inherit pkgs; } else [];
+  userExtensions = if enableUserExtensions then import ../modules/user-extensions.nix { inherit pkgs; } else [];
   angularExtensions = import ./angular.nix { inherit pkgs; };
-  allExtensions = gitExtensions ++ htmlCssExtensions ++ jsTsExtensions ++ markdownExtensions ++ userExtensions ++ universalExtensions ++ angularExtensions ;
+  allExtensions = gitExtensions ++ htmlCssExtensions ++ jsTsExtensions ++ markdownExtensions ++ universalExtensions ++ userExtensions ++ angularExtensions ;
   # Define a custom VSCode derivation with extensions
   vscodeWithExtensions = pkgs.vscode-with-extensions.override {
     # Select VSCode (unfree) or Vscodium based on flags
